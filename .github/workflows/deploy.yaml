@@ -23,11 +23,11 @@ jobs:
       with:
         azcliversion: 2.46.0
         inlineScript: |
-          chmod +x $GITHUB_WORKSPACE/Templates/Network.azcli
-          $GITHUB_WORKSPACE/Templates/Network.azcli
-          chmod +x $GITHUB_WORKSPACE/Templates/VM.azcli
-          $GITHUB_WORKSPACE/Templates/VM.azcli
-          chmod +x $GITHUB_WORKSPACE/Templates/Database.azcli
-          $GITHUB_WORKSPACE/Templates/Database.azcli
-          chmod +x $GITHUB_WORKSPACE/Templates/App.azcli
-          $GITHUB_WORKSPACE/Templates/App.azcli
+          chmod +x $GITHUB_WORKSPACE/Network.azcli
+          $GITHUB_WORKSPACE/Network.azcli
+          chmod +x $GITHUB_WORKSPACE/VM.azcli
+          $GITHUB_WORKSPACE/VM.azcli
+          chmod +x $GITHUB_WORKSPACE/Database.azcli
+          $GITHUB_WORKSPACE/Database.azcli
+          chmod +x $GITHUB_WORKSPACE/App.azcli
+          $GITHUB_WORKSPACE/App.azcli
