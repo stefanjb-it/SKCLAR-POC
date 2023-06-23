@@ -12,12 +12,6 @@ vName=UE-3-CLI_NET
 #Define subnet name
 subName=UE-3-CLI-SUB
 
-#Define nsg name
-nsgName=UE-3-CLI-NSG
-
 #create virtual network
 az network vnet create --name $vName --resource-group $rg --address-prefix 10.0.0.0/16 --location $location
 az network vnet subnet create --name $subName --resource-group $rg --address-prefix 10.0.0.0/24 --vnet-name $vName
-
-#create NSG
-az network nsg create --name $nsgName --resource-group $rg --location $location 
