@@ -1,8 +1,8 @@
-name: deploy
+name: deploy_release_azurecli
 
 on:
-  push:
-    tags: ["deploy**"]
+  release:
+    types: [created]
 
 jobs:
 
