@@ -1,0 +1,33 @@
+name: deploy
+
+on:
+  push:
+    tags: ["deploy**"]
+
+jobs:
+
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Azure Login
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - name: Checkout
+      uses: actions/checkout@v1
+
+    - name: Azure CLI script file
+      uses: azure/CLI@v1
+      with:
+        azcliversion: 2.46.0
+        inlineScript: |
+          chmod +x $GITHUB_WORKSPACE/Templates/Network.azcli
+          $GITHUB_WORKSPACE/Templates/Network.azcli
+          chmod +x $GITHUB_WORKSPACE/Templates/VM.azcli
+          $GITHUB_WORKSPACE/Templates/VM.azcli
+          chmod +x $GITHUB_WORKSPACE/Templates/Database.azcli
+          $GITHUB_WORKSPACE/Templates/Database.azcli
+          chmod +x $GITHUB_WORKSPACE/Templates/App.azcli
+          $GITHUB_WORKSPACE/Templates/App.azcli
