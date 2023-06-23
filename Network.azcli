@@ -1,0 +1,17 @@
+#!/bin/bash
+
+subscription_id=c42c6aa8-3c10-40e5-a3ff-ba5843e3dda5
+az account set --subscription $subscription_id
+
+#define resource group 
+rg=CLINF-GL_Joebstl
+
+#public vNet Name
+vName=UE-3-CLI_NET
+
+#Define subnet name
+subName=UE-3-CLI-SUB
+
+#create virtual network
+az network vnet create --name $vName --resource-group $rg --address-prefix 10.0.0.0/16 --location $location
+az network vnet subnet create --name $subName --resource-group $rg --address-prefix 10.0.0.0/24 --vnet-name $vName
