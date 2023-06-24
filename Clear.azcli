@@ -1,0 +1,14 @@
+#!/bin/bash
+
+subscription_id=c42c6aa8-3c10-40e5-a3ff-ba5843e3dda5
+
+az account set --subscription $subscription_id
+
+#define resource group 
+rg=CLINF-GL_Joebstl
+
+resources="$(az resource list --resource-group $rg | grep id | awk -F \" '{print $4}')"
+
+for id in $resources; do
+    az resource delete --ids "$id" --verbose
+done
