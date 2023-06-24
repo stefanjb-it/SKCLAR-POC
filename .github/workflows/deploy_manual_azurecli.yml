@@ -24,9 +24,7 @@ jobs:
       with:
         azcliversion: 2.46.0
         inlineScript: |
-          foreach filename in $GITHUB_WORKSPACE/*.azcli; do
-            echo $filename
-          done
+          foreach filename in $GITHUB_WORKSPACE/*.azcli; do echo $filename done
           chmod +x $GITHUB_WORKSPACE/Network.azcli
           $GITHUB_WORKSPACE/Network.azcli
           chmod +x $GITHUB_WORKSPACE/VM.azcli
