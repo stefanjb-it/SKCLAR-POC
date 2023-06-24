@@ -1,5 +1,7 @@
 #!/bin/bash
 
+########## Start of variable Definition ##############
+
 #define a subscription
 subscription_id=c42c6aa8-3c10-40e5-a3ff-ba5843e3dda5
 
@@ -9,8 +11,40 @@ az account set --subscription $subscription_id
 #define resource group 
 rg=CLINF-GL_Joebstl
 
+#define number of vms
+numbOfVMs=2
+
 #public vNet Name
 vName=UE-3-CLI_NET
+
+#Define subnet name
+subName=UE-3-CLI-SUB
+
+#Define nsg name
+nsgName=UE-3-CLI-NSG
+
+#Define availabilityset name
+avName=UE-3-CLI-AV
+
+#Define name of vm
+vmName=UE-3-CLI-VM
+
+#Define location
+location=northeurope
+
+#Define admin name for VM
+adminName=admindeploy
+
+#Define password for admin account
+adminPw=AdminPassword123
+
+#Define array for internal ips of VMs
+ips=()
+for l in $( seq 1 $numbOfVMs)
+do
+    ips+=(10.0.0.1$l)
+    echo 10.0.0.1$l
+done
 
 #Define name for public IP address for the loadbalancer
 lbpubip=UE-3-CLI-LB-PUB
@@ -24,16 +58,7 @@ lbFrontName=UE-3-CLI-LB-FRONT
 #Define loadbalancer backend name
 lbBackName=UE-3-CLI-LB-BACK
 
-#Define array for internal ips of VMs
-ips=()
-for l in $( seq 1 $numbOfVMs)
-do
-    ips+=(10.0.0.1$l)
-    echo 10.0.0.1$l
-done
-
-#Define name of vm
-vmName=UE-3-CLI-VM
+########## End of variable Definition ##############
 
 #Create public IP address for load balancer
 az network public-ip create --name $lbpubip --resource-group $rg --location $location --sku Standard

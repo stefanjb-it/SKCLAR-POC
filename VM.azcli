@@ -1,6 +1,6 @@
 #!/bin/bash
 
-numbOfVMs=2
+########## Start of variable Definition ##############
 
 #define a subscription
 subscription_id=c42c6aa8-3c10-40e5-a3ff-ba5843e3dda5
@@ -10,6 +10,15 @@ az account set --subscription $subscription_id
 
 #define resource group 
 rg=CLINF-GL_Joebstl
+
+#define number of vms
+numbOfVMs=2
+
+#public vNet Name
+vName=UE-3-CLI_NET
+
+#Define subnet name
+subName=UE-3-CLI-SUB
 
 #Define nsg name
 nsgName=UE-3-CLI-NSG
@@ -37,6 +46,21 @@ do
     echo 10.0.0.1$l
 done
 
+#Define name for public IP address for the loadbalancer
+lbpubip=UE-3-CLI-LB-PUB
+
+#Define name for loadbalancer
+lbName=UE-3-CLI-LB
+
+#Define loadbalancer frontend name
+lbFrontName=UE-3-CLI-LB-FRONT
+
+#Define loadbalancer backend name
+lbBackName=UE-3-CLI-LB-BACK
+
+########## End of variable Definition ##############
+
+#create an availability set for VM's
 az vm availability-set create --name $avName --resource-group $rg --location $location
 
 #create VM's (Win2022Datacenter, Standard_B1) within the availability set within a for loop
