@@ -27,7 +27,5 @@ jobs:
           $GITHUB_WORKSPACE/Network.azcli
           chmod +x $GITHUB_WORKSPACE/VM.azcli
           $GITHUB_WORKSPACE/VM.azcli
-          chmod +x $GITHUB_WORKSPACE/Database.azcli
-          $GITHUB_WORKSPACE/Database.azcli
-          chmod +x $GITHUB_WORKSPACE/App.azcli
-          $GITHUB_WORKSPACE/App.azcli
+          chmod +x $GITHUB_WORKSPACE/LoadBalancer.azcli
+          $GITHUB_WORKSPACE/LoadBalancer.azcli

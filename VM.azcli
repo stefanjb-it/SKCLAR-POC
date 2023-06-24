@@ -1,0 +1,54 @@
+#!/bin/bash
+
+numbOfVMs=2
+
+#define a subscription
+subscription_id=c42c6aa8-3c10-40e5-a3ff-ba5843e3dda5
+
+#set subscription
+az account set --subscription $subscription_id  
+
+#define resource group 
+rg=CLINF-GL_Joebstl
+
+#Define nsg name
+nsgName=UE-3-CLI-NSG
+
+#Define availabilityset name
+avName=UE-3-CLI-AV
+
+#Define name of vm
+vmName=UE-3-CLI-VM
+
+#Define location
+location=northeurope
+
+#Define admin name for VM
+adminName=admindeploy
+
+#Define password for admin account
+adminPw=AdminPassword123
+
+#Define array for internal ips of VMs
+ips=()
+for l in $( seq 1 $numbOfVMs)
+do
+    ips+=(10.0.0.1$l)
+    echo 10.0.0.1$l
+done
+
+az vm availability-set create --name $avName --resource-group $rg --location $location
+
+#create VM's (Win2022Datacenter, Standard_B1) within the availability set within a for loop
+for i in $(seq 1 $numbOfVMs)
+do
+    az vm create --name "${vmName}-${i}" --resource-group $rg --location $location --image Win2022Datacenter --size Standard_B2s --admin-username $adminName --admin-password $adminPw --private-ip-address ${ips[$i-1]} --public-ip-address "" --nsg $nsgName --availability-set $avName
+done
+
+#Extend VM's with IIS Server and a simple html file to display the name of the VM
+for k in $(seq 1 $numbOfVMs)
+do
+    az vm run-command invoke --name "${vmName}-${k}" --resource-group $rg --command-id RunPowerShellScript --script "powershell.exe Install-WindowsFeature -name Web-Server -IncludeManagementTools "
+    az vm run-command invoke --name "${vmName}-${k}" --resource-group $rg --command-id RunPowerShellScript --script "powershell.exe Remove-Item -Path C:\inetpub\wwwroot\iisstart.htm"
+    az vm run-command invoke --name "${vmName}-${k}" --resource-group $rg --command-id RunPowerShellScript --script "powershell.exe Add-Content -Path C:\inetpub\wwwroot\iisstart.htm -Value \$env:Computername"
+done
