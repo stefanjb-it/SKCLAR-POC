@@ -19,7 +19,23 @@ jobs:
       with:
         ref: azurecli
 
-    - name: Azure CLI script file
+    - name: Azure CLI clear 1
+      uses: azure/CLI@v1
+      with:
+        azcliversion: 2.46.0
+        inlineScript: |
+          chmod +x $GITHUB_WORKSPACE/Clear.azcli
+          $GITHUB_WORKSPACE/Clear.azcli
+
+    - name: Azure CLI clear 2
+      uses: azure/CLI@v1
+      with:
+        azcliversion: 2.46.0
+        inlineScript: |
+          chmod +x $GITHUB_WORKSPACE/Clear.azcli
+          $GITHUB_WORKSPACE/Clear.azcli
+    
+    - name: Azure CLI clear 3
       uses: azure/CLI@v1
       with:
         azcliversion: 2.46.0
