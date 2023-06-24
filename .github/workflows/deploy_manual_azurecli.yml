@@ -1,7 +1,7 @@
 name: deploy_manual_azurecli
 
 on:
-  workflow_dispatch
+  workflow_dispatch:
 
 jobs:
 
