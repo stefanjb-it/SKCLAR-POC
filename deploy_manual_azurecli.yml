@@ -1,0 +1,34 @@
+name: deploy_manual_azurecli
+
+on:
+  workflow_dispatch:
+
+jobs:
+
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Azure Login
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS_AZURECLI_CLINF_GL_JOEBSTL }}
+
+    - name: Checkout
+      uses: actions/checkout@v1
+      with:
+        ref: azurecli
+
+    - name: Azure CLI script file
+      uses: azure/CLI@v1
+      with:
+        azcliversion: 2.46.0
+        inlineScript: |
+          chmod +x $GITHUB_WORKSPACE/Network.azcli
+          $GITHUB_WORKSPACE/Network.azcli
+          chmod +x $GITHUB_WORKSPACE/VM.azcli
+          $GITHUB_WORKSPACE/VM.azcli
+          chmod +x $GITHUB_WORKSPACE/Database.azcli
+          $GITHUB_WORKSPACE/Database.azcli
+          chmod +x $GITHUB_WORKSPACE/App.azcli
+          $GITHUB_WORKSPACE/App.azcli
