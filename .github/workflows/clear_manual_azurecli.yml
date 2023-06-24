@@ -1,4 +1,4 @@
-name: deploy_manual_azurecli
+name: clear_manual_azurecli
 
 on:
   workflow_dispatch
