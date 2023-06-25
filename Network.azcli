@@ -12,7 +12,7 @@ az account set --subscription $subscription_id
 rg=CLINF-GL_Joebstl
 
 #define number of vms
-numbOfVMs=2
+numbOfVMs=${1:-2}
 
 #public vNet Name
 vName=UE-3-CLI_NET
