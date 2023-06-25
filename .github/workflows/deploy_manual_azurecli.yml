@@ -31,8 +31,8 @@ jobs:
         azcliversion: 2.46.0
         inlineScript: |
           chmod +x $GITHUB_WORKSPACE/Network.azcli
-          $GITHUB_WORKSPACE/Network.azcli
+          $GITHUB_WORKSPACE/Network.azcli ${{ inputs.numberOfVMs }}
           chmod +x $GITHUB_WORKSPACE/VM.azcli
-          $GITHUB_WORKSPACE/VM.azcli
+          $GITHUB_WORKSPACE/VM.azcli ${{ inputs.numberOfVMs }}
           chmod +x $GITHUB_WORKSPACE/LoadBalancer.azcli
-          $GITHUB_WORKSPACE/LoadBalancer.azcli
+          $GITHUB_WORKSPACE/LoadBalancer.azcli ${{ inputs.numberOfVMs }}
