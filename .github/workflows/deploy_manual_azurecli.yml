@@ -2,6 +2,12 @@ name: deploy_manual_azurecli
 
 on:
   workflow_dispatch:
+    inputs:
+      numberOfVMs:
+        description: 'Define the amount of deployed VMs for the backend (default=2)'
+        required: false
+        type: number
+
 
 jobs:
 
